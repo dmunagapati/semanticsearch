@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Semantic Search Notes</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 40px;
+      background-color: #f7f9fc;
+    }
+
+    textarea, input[type="text"], input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    h2, h3 {
+      color: #333;
+    }
+
+    ul {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      list-style-type: disc;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Semantic Note Search</h1>
+
+  <form method="POST" enctype="multipart/form-data" id="notes-form">
+    <h2>Step 1: Upload Notes</h2>
+    <textarea name="notes" id="notes" rows="10" placeholder="Paste your notes here..."></textarea><br>
+    <input type="file" name="file" id="file" accept=".txt,.pdf"><br><br>
+    <button type="submit" name="action" value="upload">Upload Notes</button>
+  </form>
+  
+  <h2>Step 2: Ask a Question</h2>
+  <form method="POST">
+    <input type="text" name="question" id="question" placeholder="e.g., What is mitosis?" required>
+    <button type="submit" id="search-btn">Search</button>
+  </form>
+  
+  {% if results %}
+    <h3>Top Matching Chunks:</h3>
+    <ul>
+      {% for r in results %}
+        <li>{{ r }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
