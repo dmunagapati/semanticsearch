@@ -6,7 +6,8 @@ import numpy as np
 from werkzeug.utils import secure_filename
 from PyPDF2 import PdfReader
 
-co = cohere.Client("O0h3LoeEwiNJZZ323zLzikGHxZl7iGaphEf2ladz")
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
+co = cohere.Client(COHERE_API_KEY)
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2 MB
